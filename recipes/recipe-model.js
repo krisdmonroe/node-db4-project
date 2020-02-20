@@ -2,8 +2,6 @@ const db = require("./dbConfig.js")
 
 module.exports = {
     getRecipes,
-    getShoppingList,
-    getInstructions,
 }
 
 

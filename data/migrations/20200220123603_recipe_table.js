@@ -5,7 +5,7 @@ exports.up = function(knex) {
     tbl.string('recipe_name' , 128)
       .unique()
       .notNullable();
-    tbl.string("ingredients").notNullable();
+    tbl.string("instrctions").notNullable();
   })
   .createTable("ingredients", tbl => {
       tbl.increments()
@@ -13,21 +13,25 @@ exports.up = function(knex) {
   })
   .createTable("recipe_step", tbl => {
       tbl.increments()
-      tbl.float('quantity').notNullable()
+      
+      tbl.float("quantity")
+      .notNullable()
+
       tbl.integer("recipe_id")
       .unsigned()
       .notNullable()
-      .reference("id")
-      .intable("recipes")
+      .references("id")
+      .inTable("recipes")
       .onUpdate('CASCADE')
-      .onDelete('CASCADE')
+      .onDelete('RESTRICT');
+
       tbl.integer("ingredient_id")
       .unsigned()
       .notNullable()
-      .reference("id")
-      .intable("ingredients")
+      .references("id")
+      .inTable("ingredients")
       .onUpdate('CASCADE')
-      .onDelete('CASCADE')
+      .onDelete('RESTRICT');
   })
 };
 
