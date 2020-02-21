@@ -16,22 +16,19 @@ router.get('/', (req, res) => {
   });
   
   router.get('/:id/list', (req, res) => {
-    const id = req.params.id;
+    const id  = req.params.id
   
     Recipes.getShoppingList(id)
-    .then(recipe => {
-        if (recipe) {
-          res.json(recipe);
-        } else {
-          res.status(404).json({ message: "Could not recipe with given id." });
-        }
+    .then(list => {
+        res.json(list);
       })
       .catch(err => {
         res.status(500).json({ message: "Failed to get recipe shopping list" });
       });
 
   });
-  router.get('/:id/in', (req, res) => {
+
+  router.get('/:id', (req, res) => {
     const id = req.params.id;
     Recipes.getInstructions(id)
     .then(recipe => {
